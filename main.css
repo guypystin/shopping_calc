@@ -1,0 +1,34 @@
+body{
+    background-color: gray;
+}
+.calc{
+    display: flex;
+    width: 50%;
+}
+.form{
+    display: flex;
+    flex-wrap: /wrap;
+}
+.form-item{
+    border: 1px solid red;
+    background-color: black;
+    color:white;
+    height: 30px;
+    font-size: 30px;
+}
+.buy{
+    width: 100px;
+}
+.list{
+    margin-top: 50px;
+    width: 50%;
+    min-height: 500px;
+    background-color:burlywood;
+    border:2px solid red;
+}
+.table{
+    width: 500px;
+}
+.stolb{
+    text-align: center;
+}
