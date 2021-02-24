@@ -10,21 +10,35 @@
 <body>
    <div class="calc">
        <form action="" class="calc__form form">
-           <input class = "form-name form-item" type="text" placeholder="Продукт">
-           <input class = "form-price form-item" type="number" placeholder="цена">
-           <input class = "form-amount form-item" type="number" placeholder="кол-во">
+           <div class="first">
+                <input class = "form-name form-item" type="text" placeholder="Продукт">
+            </div>
+           <div class="two">
+            <input class = "form-price form-item" type="number" placeholder="цена">
+            <h1 class="mul">Х</h1>
+            <input class = "form-amount form-item" type="number" placeholder="кол-во">
+        </div>
        </form>
        <button class="buy" onclick="create_table(1,4)">Купить</button>
    </div>
-   <table class = "table" border="2" >
-       <tr class="str">
-           <th>Название</th>
-           <th>Цена</th>
-           <th>Колличество</th>
-           <th>Итого</th>
-       </tr>
-       
-       
+   <table class = "table" border="1" >
+       <thead>
+        <tr class="str">
+            <th class="str_name">Название</th>
+            <th class="str_price">Цена</th>
+            <th class="str_amount">Колличество</th>
+            <th class="str_sum">Итого</th>
+        </tr>
+       </thead>
+       <tbody class="tbody">
+
+       </tbody>
+       <tfoot >
+           <tr cols = "2">
+            <th class="tfoot_text">Итого</th>
+            <th class = "tfoot_sum">к</th>
+           </tr>
+       </tfoot>
        
    </table>
     <script src="script.js"></script>

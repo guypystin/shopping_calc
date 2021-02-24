@@ -1,37 +1,86 @@
+
 body{
-    background-color: gray;
+    background: gray;
 }
-.calc{
-    display: flex;
-    width: 50%;
-}
-.form{
-    display: flex;
-    flex-wrap: /wrap;
-}
-.form-item{
-    border: 1px solid red;
-    background-color: black;
-    color:white;
-    height: 30px;
-    font-size: 30px;
-}
-.buy{
-    width: 100px;
-}
-.list{
-    margin-top: 50px;
-    width: 50%;
-    min-height: 500px;
-    background-color:burlywood;
-    border:2px solid red;
+th{
+    margin-left: 0px;
 }
 .table{
     width: 500px;
+    display: block;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 0px solid #000;
 }
-.stolb{
-    text-align: center;
+thead{
+    width: 100%;
+    border: 1px solid black;
 }
-.ok{
-    visibility: hidden;
+tfoot{
+    border: 1px solid black;
+}
+
+.tbody{
+    display: block;
+    justify-content: space-between;
+    height: 100px;
+    overflow-y: auto;
+}
+.str{
+    height: 20px;
+}
+.str_name {
+    width: 125px;
+    height: 20px;
+}
+.str_price {
+    width: 125px;
+    height: 20px;
+}
+.str_amount {
+    width: 125px;
+    height: 20px;
+}
+.str_sum {
+    width: 125px;
+    height: 20px;
+}
+tfoot{
+    width: 100%;
+    
+}
+.tfoot_sum{
+    width: 250px;
+}
+.tfoot_text{
+    width: 250px;
+}
+
+.foundation{
+    height: 25px;
+    
+}
+.name{
+    width: 125px;
+    border: 1px solid black;
+    border-top: 0px solid #000;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+.price{
+    width: 125px;
+    border: 1px solid black;
+    border-top: 0px solid #000;
+}
+.amount{
+    width: 125px;
+    border: 1px solid black;
+    border-top: 0px solid #000;
+}
+.sum{
+    width: 125px;
+    border: 1px solid black;
+    border-top: 0px solid #000;
 }
