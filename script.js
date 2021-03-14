@@ -1,4 +1,4 @@
-let create_table = function (row, column) {
+let create_table = function () {
   /* Обьявление инпутов */
   let prod_name = document.querySelector(".form-name");
   let prod_price = document.querySelector(".form-price");
@@ -21,10 +21,14 @@ let create_table = function (row, column) {
     let append_tr_amount = create_tr.appendChild(create_td_amount); // добавляем td колиичества товара в tr как дочерний элемент
     let append_tr_sum = create_tr.appendChild(create_td_sum); // добавляем td для умножения цены на кол-во товара в tr как дочерний элемент
 
-    append_tr_name.innerHTML = prod_name.value; // вписываем данные с input в таблицу
-    append_tr_price.innerHTML = prod_price.value; // вписываем данные с input в таблицу
-    append_tr_amount.innerHTML = prod_amount.value; // вписываем данные с input в таблицу
-    append_tr_sum.innerHTML = prod_price_sum; // вписываем данные с input в таблицу
+
+    /* Перенос данных с input в tbody */
+    [
+      [append_tr_name, prod_name.value],
+      [append_tr_price, prod_price.value],
+      [append_tr_amount, prod_amount.value],
+      [append_tr_sum, prod_price_sum],
+    ].forEach((key, value) => set_val_into_field(key, value));
 
     /* добавляет классы элементам таблицы */
     function add_class() {
@@ -43,56 +47,46 @@ let create_table = function (row, column) {
     if (prod_price_sum > 0.5) {
       insert_rows();
     }
-    if (prod_name.value == "") {
-      prod_name.style = "border: 1px solid red";
-    } else {
-      prod_name.style = "border: 1px solid black";
-    }
-    if (prod_price.value == "") {
-      prod_price.style = "border: 1px solid red";
-    } else {
-      prod_price.style = "border: 1px solid black";
-    }
-    if (prod_amount.value == "") {
-      prod_price.style = "border: 1px solid red";
-    } else {
-      prod_amount.style = "border: 1px solid black";
-    }
-    if (prod_name.value > 0 || prod_price.value > 0) {
+
+    [prod_name, prod_amount, prod_price].forEach((name) => {
+      name.style = name.value
+        ? "border: 1px solid black"
+        : "border: 1px solid red";
+    });
+
+    if (prod_name.value || prod_price.value) {
       clean();
     }
   }
+
   check_value();
   /* отчистка инпутов после нажатия */
   function clean() {
-    prod_name.value = "";
-    prod_price.value = "";
-    prod_amount.value = "";
-    prod_price_sum.value = "";
+    [prod_name, prod_price, prod_amount, prod_price_sum].forEach(
+      (item) => (item.value = "")
+    );
   }
 
   /* Записываем итоговую сумму в футер */
   function calcFootSum() {
-    let arr = [];
     let calc = 0; //сюда будем складывать итоговую сумму
-
     let numbers = document.getElementsByClassName("sum");
 
     for (var i = 0; i < numbers.length; i++) {
-      arr.push(numbers[i].innerHTML);
+      calc += parseInt(numbers[i].innerHTML);
     }
-
-    for (var i = 0; i < arr.length; i++) {
-      calc = calc + parseInt(arr[i]);
-    }
-
-    let foot = document.querySelector(".tfoot_sum");
-    foot.innerHTML = calc;
+    document.querySelector(".tfoot_sum").innerHTML = calc;
   }
   calcFootSum();
   add_standart_amount();
+  // focus()
 };
-
+//установка фокуса
+// function focus(){
+//   let prod_name = document.querySelector(".form-name");
+//   prod_name.focus()
+// }
+// focus()
 /* запуск функции "create_table" по нажатию enter */
 let run_enter = document.addEventListener("keydown", function (tap) {
   if (tap.keyCode === 13) {
@@ -105,4 +99,23 @@ function add_standart_amount() {
   let standart_amount = document.querySelector(".form-amount");
   standart_amount.value = 1;
 }
+
 add_standart_amount();
+
+let set_val_into_field = (field, value) => (field[0].innerHTML = field[1]);
+
+
+
+
+
+
+//добавляет аттрибут к элементам кнопок
+let buttons = document.querySelectorAll(".number");
+let arr = [...buttons];
+arr.forEach(function(i){
+    i.setAttribute("onclick", `typeText(${i.textContent})`);
+});
+function typeText(t){
+  //допишу позже
+}
+
