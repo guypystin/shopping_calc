@@ -11,33 +11,34 @@
    <div class="calc component">
        <form action="" class="calc__form form">
            <div class="first">
-                <input min="0" class = "form-name form-item" type="text" placeholder="Продукт">
+                <input min="0"  class = "form-name form-item" type="text" placeholder="Продукт">
             </div>
            <div class="two">
-            <input min="0" class = "form-price form-item" type="number" placeholder="цена">
+            <input min="0" max="41" class = "form-price form-item" type="number" placeholder="цена">
+            <div class="mul__two">*</div>
             <input min="0" class = "form-amount form-item" type="number" placeholder="кол-во">
         </div>
        </form>
        <div class="calc__buttons">
-          <div id="item"class="item dark" >C</div>
-          <div class="item dark" >←</div>
-          <div class="item dark" >%</div>
-          <div class="item orange" >÷</div>
+          
           <div class="item number" >7</div>
           <div class="item number" >8</div>
           <div class="item number" >9</div>
-          <div class="item orange" >x</div>
+          <div id="item"class="item orange clear" onclick="clean()">C</div>
+          
           <div class="item number" >4</div>
           <div class="item number" >5</div>
           <div class="item number" >6</div>
-          <div class="item orange" >-</div>
+          
+          <div class="item orange delete__one-class" onclick="deleteOne()">←</div>
           <div class="item number" >1</div>
           <div class="item number" >2</div>
           <div class="item number" >3</div>
-          <div class="item orange" >+</div>
+          <div class="item orange multiple" >*</div>
+          
           <div class="item zero number" >0</div>
-          <div class="item" >.</div>
-          <button class="buy item result orange" onclick="create_table()">Купить</button>
+          <div class="item number float" >.99</div>
+          <button class="buy item result orange" onclick="create_table()">&#128722;</button>
        </div>
        
    </div>

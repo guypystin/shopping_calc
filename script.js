@@ -1,4 +1,5 @@
 let create_table = function () {
+
   /* Обьявление инпутов */
   let prod_name = document.querySelector(".form-name");
   let prod_price = document.querySelector(".form-price");
@@ -51,7 +52,7 @@ let create_table = function () {
     [prod_name, prod_amount, prod_price].forEach((name) => {
       name.style = name.value
         ? "border: 1px solid black"
-        : "border: 1px solid red";
+        : "border: 2px solid red";
     });
 
     if (prod_name.value || prod_price.value) {
@@ -60,33 +61,52 @@ let create_table = function () {
   }
 
   check_value();
-  /* отчистка инпутов после нажатия */
-  function clean() {
-    [prod_name, prod_price, prod_amount, prod_price_sum].forEach(
-      (item) => (item.value = "")
-    );
-  }
 
-  /* Записываем итоговую сумму в футер */
+  /* Записывает итоговую сумму в футер */
   function calcFootSum() {
-    let calc = 0; //сюда будем складывать итоговую сумму
+    let calc = 0; //сюда будет складываться итоговая сумма
     let numbers = document.getElementsByClassName("sum");
 
     for (var i = 0; i < numbers.length; i++) {
       calc += parseInt(numbers[i].innerHTML);
     }
-    document.querySelector(".tfoot_sum").innerHTML = calc;
+    let newCalc = calc.toLocaleString('ru-RU') + ' ₽'
+    document.querySelector(".tfoot_sum").innerHTML = newCalc;
   }
+
+
+  //Удаление продуктов из списка
+  function deleteItems() {
+    let item = document.querySelectorAll(".foundation")
+    let arr = [...item]
+    arr.forEach(function (el) {
+      el.addEventListener('mousemove', function () {
+        el.classList.add('red');
+      })
+      el.addEventListener('mouseout', function () {
+        el.classList.remove('red');
+      })
+      el.addEventListener('click', function () {
+        let acces = confirm('Вы точно хотите удалить ' + `${el.firstElementChild.innerHTML}` + ' ?');
+        if (acces) {
+          el.remove()
+        }
+
+        calcFootSum();
+
+
+      })
+    })
+  }
+
+
+
   calcFootSum();
   add_standart_amount();
+  deleteItems()
   // focus()
 };
-//установка фокуса
-// function focus(){
-//   let prod_name = document.querySelector(".form-name");
-//   prod_name.focus()
-// }
-// focus()
+
 /* запуск функции "create_table" по нажатию enter */
 let run_enter = document.addEventListener("keydown", function (tap) {
   if (tap.keyCode === 13) {
@@ -104,18 +124,68 @@ add_standart_amount();
 
 let set_val_into_field = (field, value) => (field[0].innerHTML = field[1]);
 
-
-
-
-
-
 //добавляет аттрибут к элементам кнопок
-let buttons = document.querySelectorAll(".number");
-let arr = [...buttons];
-arr.forEach(function(i){
+function addAttribute() {
+  let buttons = document.querySelectorAll(".number");
+  let arr = [...buttons];
+  arr.forEach(function (i) {
     i.setAttribute("onclick", `typeText(${i.textContent})`);
-});
-function typeText(t){
-  //допишу позже
+  });
 }
+addAttribute();
 
+//active для формы по клику
+function addActiveClass() {
+  let nameForm = document.querySelector(".form-name")
+  let priceForm = document.querySelector(".form-price")
+  let amountForm = document.querySelector(".form-amount")
+  priceForm.onclick = function () {
+    priceForm.classList.add("active")
+    amountForm.classList.remove("active");
+    nameForm.classList.remove("active");
+  }
+
+  amountForm.onclick = function () {
+    amountForm.classList.add("active");
+    priceForm.classList.remove("active");
+    nameForm.classList.remove("active");
+
+    if (amountForm.value == 1) {
+      amountForm.value == '';
+    }
+  }
+  nameForm.onclick = function () {
+    nameForm.classList.add("active");
+    priceForm.classList.remove("active");
+    amountForm.classList.remove("active");
+  }
+
+}
+addActiveClass()
+
+/* Набирает текст с экранной клавиатуры
+  В input с классом .active */
+function typeText(t) {
+  let ab = document.querySelector(".active")
+  ab.value += t;
+  checkValue()
+};
+
+//отчищает поля
+function clean() {
+  let prod_name = document.querySelector(".form-name").value = "";
+  let prod_price = document.querySelector(".form-price").value = "";
+  let prod_amount = document.querySelector(".form-amount").value = 1;
+}
+function deleteOne() {
+  let act = document.querySelector('.active')
+  act.value = act.value.substring(0, act.value.length - 1);
+}
+function checkValue() {
+  let inp = document.querySelectorAll("input");
+  let inpArr = inp.forEach(function (el) {
+    if (el.value.length > 5) {
+      el.value = el.value.slice(0, 9);
+    }
+  })
+}
